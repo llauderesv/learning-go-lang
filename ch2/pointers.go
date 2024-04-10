@@ -9,7 +9,7 @@ func main() {
 
 	var i *int //
 	i = &x     // passing the address of variable x
-	*i = 2     // Dereferencing the variable
+	*i = 2     // Dereferencing the variable since this was pointed to the variable 'x', x will be also updated.
 
 	fmt.Printf("The value of i: %d is equivalent to x: %d\n", *i, x)
 
