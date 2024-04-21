@@ -1,7 +1,13 @@
-package tempconv
+package main
+
+import "fmt"
 
 type Celsius float64
 type Fahrenheit float64
+
+func (c Celsius) String() string {
+	return fmt.Sprintf("%gC", c)
+}
 
 const (
 	AbsoluteZeroC Celsius = -273.15
@@ -19,4 +25,10 @@ func FToC(f Fahrenheit) Celsius {
 
 func Add(x, y int) int {
 	return x + y
+}
+
+func main() {
+	c := Celsius((2 - 32) * 5 / 9)
+
+	fmt.Println(c.String())
 }
