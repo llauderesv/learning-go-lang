@@ -1,13 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
 type Bank struct {
 	balance int
 }
 
-func (b *Bank) Deposit(amount int) {
+func (b *Bank) Deposit(amount int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	fmt.Println(b.balance)
 	b.balance = b.balance + amount
+	fmt.Println("Current Balance: ", b.Balance())
 }
 
 func (b *Bank) Balance() int {
@@ -17,11 +23,13 @@ func (b *Bank) Balance() int {
 func main() {
 
 	b := Bank{balance: 100}
+	var wg sync.WaitGroup
 
-	go func() {
-		b.Deposit(200)
-		fmt.Println("=", b.Balance())
-	}()
+	wg.Add(1)
+	go b.Deposit(200, &wg)
+	wg.Wait()
 
-	go b.Deposit(100)
+	wg.Add(1)
+	go b.Deposit(100, &wg)
+	wg.Wait()
 }

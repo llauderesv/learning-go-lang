@@ -7,7 +7,7 @@ import (
 func main() {
 	x := 1
 
-	var i *int //
+	var i *int // Creates a pointer variable i
 	i = &x     // passing the address of variable x
 	*i = 2     // Dereferencing the variable since this was pointed to the variable 'x', x will be also updated.
 
